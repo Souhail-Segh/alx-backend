@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
+"""
+Simple pagination
+"""
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page, page_size):
+def index_range(page, page_size) -> Tuple[int, int]:
     """
     index_range returns a tuple with the first and last indexes of a pagination
     """
@@ -35,10 +39,8 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Get sub-list using pagination indexes
         """
-        assert isinstance(page, int)
-        assert isinstance(page_size, int)
-        assert page > 0
-        assert page_size > 0
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
 
         ds = self.dataset()
         start, end = index_range(page, page_size)
