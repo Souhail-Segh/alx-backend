@@ -22,6 +22,14 @@ class Server:
 
         return self.__dataset
 
+    def index_range(self, page, page_size):
+        """Returns a tuple with the first and last indexes of a pagination
+        """
+        start_pos = (page - 1) * page_size
+        end_pos = page * page_size
+        tuple_pos = (start_pos, end_pos)
+        return (tuple_pos)
+
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Get sub-list using pagination indexes
         """
@@ -30,9 +38,9 @@ class Server:
         assert page > 0
         assert page_size > 0
 
-        dataset = dataset()
-        indexes = index_range(page, page_size)
+        ds = self.dataset()
+        indexes = self.index_range(page, page_size)
 
-        if len(dataset) > indexes[1]:
-            return (dataset[indexes[0]:indexes[1]])
+        if len(ds) > indexes[1]:
+            return (ds[indexes[0]:indexes[1]])
         return ([])
