@@ -22,9 +22,9 @@ class MRUCache(BaseCaching):
         """
         if key is not None and item is not None:
             self.cache_data[key] = item
-            self.cache_data.move_to_end(key, last=True)
+            self.cache_data.move_to_end(key, last=False)
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                discard, _ = self.cache_data.popitem(last=True)
+                discard, _ = self.cache_data.popitem(last=False)
                 print(f'DISCARD: {discard}')
 
     def get(self, key: Any) -> Union[Dict, None]:
@@ -32,6 +32,6 @@ class MRUCache(BaseCaching):
         """
         if key is not None:
             if key in self.cache_data:
-                self.cache_data.move_to_end(key, last=True)
+                self.cache_data.move_to_end(key, last=False)
                 return self.cache_data[key]
         return None
