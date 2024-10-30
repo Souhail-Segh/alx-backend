@@ -21,11 +21,11 @@ class MRUCache(BaseCaching):
         """put key and item in the dict
         """
         if key is not None and item is not None:
-            self.cache_data[key] = item
-            self.cache_data.move_to_end(key, last=False)
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 discard, _ = self.cache_data.popitem(last=False)
                 print(f'DISCARD: {discard}')
+            self.cache_data[key] = item
+            self.cache_data.move_to_end(key, last=False)
 
     def get(self, key: Any) -> Union[Dict, None]:
         """get value assigned to key
