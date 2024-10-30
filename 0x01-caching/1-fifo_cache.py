@@ -23,7 +23,7 @@ class FIFOCache(BaseCaching):
         if key is not None and item is not None:
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 discard,_ = self.cache_data.popitem(last=False)
-                print(f'DISCARD: {discard}\n')
+                print(f'DISCARD: {discard}')
             self.cache_data[key] = item
 
     def get(self, key: Any) -> Union[Dict, None]:
